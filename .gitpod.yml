@@ -1,0 +1,21 @@
+# Arquivo de configuração para o Gitpod
+tasks:
+  - name: Compilar & Preparar
+    init: |
+      # Compila todos os arquivos Java para a versão 8
+      # Este comando roda apenas uma vez, na criação do ambiente.
+      javac --release 8 *.java
+    command: |
+      # Este comando roda toda vez que o ambiente é aberto.
+      # Ele exibe uma mensagem de boas-vindas com instruções.
+      echo ""
+      echo "==========================================================="
+      echo "✅ Ambiente pronto! O código já foi compilado."
+      echo "Use este terminal para executar os casos de teste abaixo."
+      echo "==========================================================="
+      echo ""
+
+# Configuração do editor para abrir o arquivo principal
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
