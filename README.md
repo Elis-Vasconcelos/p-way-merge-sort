@@ -43,7 +43,11 @@
 Run the Java compiler (`javac`) to create the executable `.class` file.
 
 ```bash
-javac PWayMergeSort.java
+javac --release 8 PWayMergeSort.java
+```
+
+```bash
+javac --release 8 HeapNode.java
 ```
 
 If there are no errors, this command will silently create a `PWayMergeSort.class` file in your directory.
