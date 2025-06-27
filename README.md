@@ -4,74 +4,47 @@ This project is an implementation of an external, p-way balanced merge sort algo
 
 The program is designed to sort files containing integers that are too large to fit into main memory, using the "Selection by Substitution" method to generate initial sorted runs and a min-heap for the merging phase.
 
-## How to Compile and Run
+---
 
-### Prerequisites
+## Cloud-Based Execution (Gitpod)
 
-  * Java Development Kit (JDK) version 8 or higher.
+To facilitate grading and ensure compatibility, this project is configured to run in the cloud using Gitpod.
 
-### Step 1: Clone the Repository
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#/https://github.com/Elis-Vasconcelos/p-way-merge-sort)
 
-First, clone this repository to your local machine. This will create a folder containing the necessary `PWayMergeSort.java` and `input.txt` files.
+### Testing Instructions on Gitpod
 
-```bash
-git clone https://github.com/your-username/p-way-merge-sort.git
-cd p-way-merge-sort
-```
+1.  Click the **Open in Gitpod** button above. You may need to authenticate with your GitHub account.
+2.  Wait for the environment to load. This might take a minute the first time.
+3.  A terminal will appear at the bottom of the screen with a "✅ Environment ready!" message. The code will already be compiled.
+4.  Use this terminal to run the test cases. For example:
 
-*(Remember to replace `your-username` with your actual GitHub username)*
-
-### Step 2: Compile the Code
-
-Navigate into the project directory with your terminal and run the `javac` command. To ensure compatibility, we will compile for Java 8.
-
-```bash
-# This single command compiles all necessary .java files
-javac --release 8 PWayMergeSort.java
-```
-
-*Note: You only need to compile the main file. The Java compiler will automatically find and compile any other required classes (like `MergeNode`).*
-
-### Step 3: Execute and Test
-
-Run the program from the command line, providing `p` (ways), an input file, and an output file name. The following examples use the `input.txt` provided in this repository.
-
-#### Test Case 1 (p = 3)
-
-  * **Command:**
     ```bash
+    # Test with p = 3
     java PWayMergeSort 3 input.txt output_p3.txt
     ```
-  * **Expected Statistics:**
-    ```
-    #Regs   Ways    #Runs   #Passes
-    25      3       5       2
-    ```
+5.  After execution, the output files (like `output_p3.txt`) will appear in the file explorer on the left and can be opened to verify the result.
 
-#### Test Case 2 (p = 2)
+### Local Execution (Alternative)
 
-  * **Command:**
+If you prefer to run the project locally, follow these steps.
+
+#### Prerequisites
+* Java Development Kit (JDK) version 8 or higher.
+
+#### Steps
+1.  **Clone the Repository:**
     ```bash
+    git clone [https://github.com/Elis-Vasconcelos/p-way-merge-sort.git](https://github.com/Elis-Vasconcelos/p-way-merge-sort.git)
+    cd p-way-merge-sort
+    ```
+2.  **Compile the Code:**
+    ```bash
+    # This single command compiles all necessary .java files
+    javac --release 8 PWayMergeSort.java
+    ```
+3.  **Execute and Test:**
+    ```bash
+    # Example for p = 2
     java PWayMergeSort 2 input.txt output_p2.txt
     ```
-  * **Expected Statistics:**
-    ```
-    #Regs   Ways    #Runs   #Passes
-    25      2       7       3
-    ```
-
-#### Test Case 3 (p = 4)
-
-  * **Command:**
-    ```bash
-    java PWayMergeSort 4 input.txt output_p4.txt
-    ```
-  * **Expected Statistics:**
-    ```
-    #Regs   Ways    #Runs   #Passes
-    25      4       4       1
-    ```
-
-### Step 4: Verify the Output
-
-After running any test case, a new `output_*.txt` file will be created. This file should contain the numbers from 1 to 25, sorted in ascending order.
