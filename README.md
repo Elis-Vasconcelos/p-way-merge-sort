@@ -1,163 +1,77 @@
-# Step-by-step guide on how to compile, execute, and properly test your `PWayMergeSort.java` program
+# External p-way Merge Sort in Java
 
-### Step 1: Set Up Your Environment
+This project is an implementation of an external, p-way balanced merge sort algorithm in Java. It was developed as a requirement for the MATA54 - Data Structures and Algorithms II course at UFBA.
 
-1.  **Save the Code:** Make sure the latest version of the code is saved as `PWayMergeSort.java` in a folder on your computer.
+The program is designed to sort files containing integers that are too large to fit into main memory, using the "Selection by Substitution" method to generate initial sorted runs and a min-heap for the merging phase.
 
-2.  **Create the Test Input File:** In the same folder, create a new text file named `input.txt`. Copy and paste the 25 numbers from the assignment PDF into this file. Each number should be on a new line.
+## How to Compile and Run
 
-    **input.txt:**
+### Prerequisites
 
-    ```
-    18
-    7
-    3
-    24
-    15
-    5
-    20
-    25
-    16
-    14
-    21
-    19
-    1
-    4
-    13
-    9
-    22
-    11
-    23
-    8
-    17
-    6
-    12
-    2
-    10
-    ```
+  * Java Development Kit (JDK) version 8 or higher.
 
-3.  **Open a Terminal/Command Prompt:** Navigate your terminal to the folder where you saved `PWayMergeSort.java` and `input.txt`.
+### Step 1: Clone the Repository
 
-### Step 2: Compile the Java Code
-
-Run the Java compiler (`javac`) to create the executable `.class` file.
+First, clone this repository to your local machine. This will create a folder containing the necessary `PWayMergeSort.java` and `input.txt` files.
 
 ```bash
+git clone https://github.com/your-username/p-way-merge-sort.git
+cd p-way-merge-sort
+```
+
+*(Remember to replace `your-username` with your actual GitHub username)*
+
+### Step 2: Compile the Code
+
+Navigate into the project directory with your terminal and run the `javac` command. To ensure compatibility, we will compile for Java 8.
+
+```bash
+# This single command compiles all necessary .java files
 javac --release 8 PWayMergeSort.java
 ```
 
-```bash
-javac --release 8 HeapNode.java
-```
+*Note: You only need to compile the main file. The Java compiler will automatically find and compile any other required classes (like `MergeNode`).*
 
-If there are no errors, this command will silently create a `PWayMergeSort.class` file in your directory.
+### Step 3: Execute and Test
 
-### Step 3: Execute the Program with Test Cases
+Run the program from the command line, providing `p` (ways), an input file, and an output file name. The following examples use the `input.txt` provided in this repository.
 
-Now, run the program using the exact examples provided in the assignment PDF. The command structure is: `java PWayMergeSort <p> <input_file> <output_file>`
-
-#### Test Case 1: p = 3
+#### Test Case 1 (p = 3)
 
   * **Command:**
     ```bash
     java PWayMergeSort 3 input.txt output_p3.txt
     ```
-  * **Expected Console Output:**
+  * **Expected Statistics:**
     ```
-    LOG: Phase 1: Generating initial runs...
-    LOG: Generated 5 initial runs.
-    LOG: Phase 2: Merging runs...
-    LOG: Starting merge pass #1 with 5 runs.
-    LOG: Starting merge pass #2 with 2 runs.
-    LOG: Merge complete.
-
-    Sorting completed in ... ms.
-
-    --- FINAL STATISTICS ---
     #Regs   Ways    #Runs   #Passes
     25      3       5       2
     ```
 
-#### Test Case 2: p = 2
+#### Test Case 2 (p = 2)
 
   * **Command:**
     ```bash
     java PWayMergeSort 2 input.txt output_p2.txt
     ```
-  * **Expected Console Output:**
+  * **Expected Statistics:**
     ```
-    LOG: Phase 1: Generating initial runs...
-    LOG: Generated 7 initial runs.
-    LOG: Phase 2: Merging runs...
-    LOG: Starting merge pass #1 with 7 runs.
-    LOG: Starting merge pass #2 with 4 runs.
-    LOG: Starting merge pass #3 with 2 runs.
-    LOG: Merge complete.
-
-    Sorting completed in ... ms.
-
-    --- FINAL STATISTICS ---
     #Regs   Ways    #Runs   #Passes
     25      2       7       3
     ```
 
-#### Test Case 3: p = 4
+#### Test Case 3 (p = 4)
 
   * **Command:**
     ```bash
     java PWayMergeSort 4 input.txt output_p4.txt
     ```
-  * **Expected Console Output:**
+  * **Expected Statistics:**
     ```
-    LOG: Phase 1: Generating initial runs...
-    LOG: Generated 4 initial runs.
-    LOG: Phase 2: Merging runs...
-    LOG: Starting merge pass #1 with 4 runs.
-    LOG: Merge complete.
-
-    Sorting completed in ... ms.
-
-    --- FINAL STATISTICS ---
     #Regs   Ways    #Runs   #Passes
     25      4       4       1
     ```
 
-### Step 4: Verify the Results
+### Step 4: Verify the Output
 
-After running each test case, you need to check two things:
-
-1.  **The Final Statistics:** Compare the console output from your program with the expected statistics shown above (which match the PDF). The `#Regs`, `Ways`, `#Runs`, and `#Passes` should all match.
-
-2.  **The Sorted Output File:** Open the generated output files (`output_p3.txt`, `output_p2.txt`, `output_p4.txt`). Each file should contain the exact same content: the 25 numbers sorted in ascending order.
-
-    **Expected content for all output files:**
-
-    ```
-    1
-    2
-    3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-    12
-    13
-    14
-    15
-    16
-    17
-    18
-    19
-    20
-    21
-    22
-    23
-    24
-    25
-    ```
-
-By following these steps, you can thoroughly test the program and be confident that it works correctly according to all specifications.
+After running any test case, a new `output_*.txt` file will be created. This file should contain the numbers from 1 to 25, sorted in ascending order.
