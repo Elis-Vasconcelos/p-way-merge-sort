@@ -3,6 +3,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 /**
@@ -56,6 +57,17 @@ public class PWayMergeSort {
         long startTime = System.currentTimeMillis();
         setupTempDirectory();
 
+        // Count total records from the input file first.
+        try (Scanner counter = new Scanner(new File(this.inputFile))) {
+            while (counter.hasNextInt()) {
+                counter.nextInt();
+                this.totalRecords++;
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: Input file not found: " + this.inputFile);
+            return;
+        }
+
         try {
             // Phase 1: The "Run Generator"
             System.out.println("LOG: Phase 1: Generating initial runs...");
@@ -90,16 +102,14 @@ public class PWayMergeSort {
      */
     private List<Path> generateInitialRuns() throws IOException {
         List<Path> runFiles = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+        try (Scanner scanner = new Scanner(new File(inputFile))) {
             PriorityQueue<Integer> heap = new PriorityQueue<>(p);
             List<Integer> frozen = new ArrayList<>();
-            String line;
             int runCounter = 0;
 
             // Prime the heap with the first 'p' numbers from the file.
-            for (int i = 0; i < p && (line = reader.readLine()) != null; i++) {
-                heap.offer(Integer.parseInt(line.trim()));
-                this.totalRecords++;
+            for (int i = 0; i < p && scanner.hasNextInt(); i++) {
+                heap.offer(scanner.nextInt());
             }
 
             // Main loop to generate runs
@@ -108,6 +118,10 @@ public class PWayMergeSort {
                     // Start a new run with the frozen elements
                     heap.addAll(frozen);
                     frozen.clear();
+                }
+
+                if (heap.isEmpty()){ // No more elements to process
+                    break;
                 }
 
                 runCounter++;
@@ -120,10 +134,8 @@ public class PWayMergeSort {
                         int minValue = heap.poll();
                         writer.write(minValue + "\n");
 
-                        line = reader.readLine();
-                        if (line != null) {
-                            this.totalRecords++;
-                            int newValue = Integer.parseInt(line.trim());
+                        if (scanner.hasNextInt()) {
+                            int newValue = scanner.nextInt();
                             if (newValue >= minValue) {
                                 heap.offer(newValue);
                             } else {
@@ -170,7 +182,7 @@ public class PWayMergeSort {
         
         // The last remaining file is the fully sorted result
         System.out.println("LOG: Merge complete.");
-        return currentRuns.get(0);
+        return currentRuns.isEmpty() ? null : currentRuns.get(0);
     }
     
     /**
